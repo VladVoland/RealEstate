@@ -1,0 +1,68 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Quick agent</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navb" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navb">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#!realEstatesView">Show all real estates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!signIn">Sign-in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!realEstateAdd" ng-hide="!logged">Add new real estate</a>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" ng-hide="!logged" ng-click="logout()">Log out</div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!manager" href="#!manager">Manager menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!admin" href="#!admin">Admin menu</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container my-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="mx-2 my-2 btn btn-secondary"><a data-toggle="tab" data-target="#Unconfirmed" role="tab">Unconfirmed</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="Unconfirmed" role="tabpanel">
+            <table class="w3-table w3-bordered w3-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Specification</th>
+                    <th>Confirm</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="realEstate in unconfirmedRealEstates">
+                    <td><p class="mt-2">{{ realEstate.Name }}</p></td>
+                    <td><p class="mt-2">{{ realEstate.Price }}</p></td>
+                    <td><p class="mt-2">{{ realEstate.Location }}</p></td>
+                    <td><p class="mt-2">{{ realEstate.Category }}</p></td>
+                    <td><p class="mt-2">{{ realEstate.Subcategory }}</p></td>
+                    <td><button class="w3-btn w3-ripple" ng-click="showSpecification(realEstate.Specification)">&#9998; Specification</button></td>
+                    <td><button class="w3-btn w3-ripple" ng-click="confirmRealEstates(realEstate.RealEstateId)">&#9998; Confirm</button></td>
+                    <td><button class="w3-btn w3-ripple" ng-click="deleteRealEstates(realEstate.RealEstateId)">&#9998; Delete</button></td>
+                </tr>
+            </table>
+            <br>
+            <form>
+                <h3>Specification:</h3>
+                <input class="w3-input w3-border disabled" type="text" ng-model="specification" placeholder="specification">
+            </form>
+        </div>
+    </div>
+</div>

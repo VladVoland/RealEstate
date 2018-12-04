@@ -1,0 +1,63 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Quick agent</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navb" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navb">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#!realEstatesView">Show all real estates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!signIn">Sign-in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!realEstateAdd" ng-hide="!logged">Add new real estate</a>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" ng-hide="!logged" ng-click="logout()">Log out</div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!manager" href="#!manager">Manager menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!admin" href="#!admin">Admin menu</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5 ml-5">
+    <div ng-hide="!logged" class="alert alert-success" role="alert">
+        <strong> You successfully logged!</strong>
+    </div>
+    <div ng-hide="!showWarningMessage" class="alert alert-danger" role="alert">
+        <h6>{{warningMessage}}</h6>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <form>
+                <div>
+                    <label class="col-sm-2 formfields">Login:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control formfields" ng-model="login" id="mail" placeholder="Login" #Login>
+                    </div>
+                </div>
+                <div>
+                    <label for="pass" class="col-sm-2 formfields">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control formfields" ng-model="password" id="pass" placeholder="Password" #Password>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-10 formfields">
+                        <button type="submit" class="btn btn-success formfields" ng-click="check()">Check</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

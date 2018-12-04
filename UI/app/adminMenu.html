@@ -1,0 +1,87 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Quick agent</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navb" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navb">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#!lotsView">Show all real estates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!signIn">Sign-in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!lotCreate" ng-hide="!logged">Add new real estate</a>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" ng-hide="!logged" ng-click="logout()">Log out</div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!manager" href="#!manager">Manager menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!admin" href="#!admin">Admin menu</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container my-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="mx-2 my-2 btn btn-secondary"><a data-toggle="tab" data-target="#category" role="tab">Category</a></li>
+        <li class="mx-2 my-2 btn btn-secondary"><a data-toggle="tab" data-target="#subcategory" role="tab">Subcategory</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="category" role="tabpanel">
+            <table class="w3-table w3-bordered w3-striped">
+                <tr>
+                    <th>Category name</th>
+                    <th>Delete category</th>
+                </tr>
+                <tr ng-repeat="categ in categories">
+                    <td><p class="mt-2">{{ categ.Name }}</p></td>
+                    <td><button class="w3-btn w3-ripple" ng-click="deleteCategory(categ.CategoryId)"> Delete</button></td>
+                </tr>
+            </table>
+            <br>
+            <form>
+                <h3>Create category:</h3>
+                <label>Category name:</label>
+                <input class="w3-input w3-border" type="text" ng-model="Name" placeholder="category name:">
+                <br>
+                <button type="button" class="btn btn-success" ng-click="saveCategory()">&#10004; Save</button>
+            </form>
+        </div>
+        <div class="tab-pane" id="subcategory" role="tabpanel">
+            <table class="w3-table w3-bordered w3-striped">
+                <tr>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Delete subcategory</th>
+                </tr>
+                <tr ng-repeat="subc in subcategories">
+                    <td><p class="mt-2">{{ subc.Category }}</p></td>
+                    <td><p class="mt-2">{{ subc.Name }}</p></td>
+                    <td><button class="w3-btn w3-ripple" ng-click="deleteSubcategory(subc.SubcategoryId)"> Delete</button></td>
+                </tr>
+            </table>
+            <br>
+            <form>
+                <h3>Create subcategory:</h3>
+                <label>Category:</label>
+                <select class="form-control" ng-model="selectedCategory">
+                    <option ng-repeat="category in categories"> {{ category.Name }}</option>
+                </select>
+                <br>
+                <label>Subcategory name:</label>
+                <input class="w3-input w3-border" type="text" ng-model="subcategName" placeholder="subcategory name:">
+                <br>
+                <button type="button" class="btn btn-success" ng-click="saveSubcategory()">&#10004; Save</button>
+            </form>
+        </div>
+    </div>
+</div>

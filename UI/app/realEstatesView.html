@@ -1,0 +1,98 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Quick agent</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navb" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navb">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#!realEstatesView">Show all real estates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!signIn">Sign-in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!realEstateAdd" ng-hide="!logged">Add new real estate</a>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" ng-hide="!logged" ng-click="logout()">Log out</div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!manager" href="#!manager">Manager menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-hide="!admin" href="#!admin">Admin menu</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container my-5">
+    <div ng-hide="!showWarningMessage" class="alert alert-danger" role="alert">
+        <h6>{{warningMessage}}</h6>
+    </div>
+    <div class="row">
+        <table class="w3-table w3-bordered w3-striped col-9">
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Price</th>
+                <th>Location</th>
+                <th>Specification</th>
+            </tr>
+            <tr ng-repeat="realEstate in realEstates">
+                <td><p class="mt-2">{{ realEstate.Name }}</p></td>
+                <td><p class="mt-2">{{ realEstate.Category }}</p></td>
+                <td><p class="mt-2">{{ realEstate.Subcategory }}</p></td>
+                <td><p class="mt-2">{{ realEstate.Price }}</p></td>
+                <td><p class="mt-2">{{ realEstate.Location }}</p></td>
+                <td><button class="w3-btn w3-ripple" ng-click="showSpecification(realEstate.Name, realEstate.Specification, realEstate.Location, realEstate.Owner, realEstate.RealEstateId)">&#9998; Specification</button></td>
+            </tr>
+        </table>
+        <div class="col-3">
+            <div class="container mt-5">
+                <h5 class="mt-2">Keyword:</h5>
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control" ng-model="searchField" type="text" placeholder="Search">
+                </form>
+                <h5 class="mt-2">Choose category:</h5>
+                <select ng-mousedown="lookSubc()" ng-change="findSubcstegories()" class="form-control" ng-model="selectedCategory">
+                    <option ng-repeat="category in categories"> {{ category.Name }}</option>
+                </select>
+                <br>
+                <h5 class="mt-2">Choose subcategory:</h5>
+                <select class="form-control" ng-model="selectedSubcategory">
+                    <option ng-repeat="subcategory in subcategories"> {{ subcategory.Name }}</option>
+                </select>
+                <br>
+                <div class="row mt-4 ml-1">
+                    <button class="col-5 btn btn-dark w3-ripple" ng-click="search()">&#9998; Search</button>
+                    <button class="col-6 btn btn-dark ml-2" ng-click="clearSearch()">&#9998; Clean filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form>
+        <h3>Edit:</h3>
+        <br>
+        <label>Name:</label>
+        <input class="w3-input w3-border" type="text" ng-model="name" ng-disabled="!owner" placeholder="name">
+        <br>
+        <label>Specification:</label>
+        <input class="w3-input w3-border" type="text" ng-model="specification" ng-disabled="!owner" placeholder="specification">
+        <br>
+        <label>Location:</label>
+        <input class="w3-input w3-border" type="text" ng-model="location" ng-disabled="!owner" placeholder="specification">
+        <br>
+        <div class="row justify-content-end">
+            <button class="btn btn-success col-2" ng-click="editRealEstate()" ng-disabled="!owner">&#10004; Save Changes</button>
+            <br>
+            <button class="btn btn-success col-2 ml-3" ng-click="deleteRealEstate()" ng-disabled="!owner">Delete</button>
+        </div>
+    </form>
+</div>
